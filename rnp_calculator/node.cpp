@@ -2,14 +2,15 @@
 
 node::node()
 {
-
+    next = NULL;
+    previous = NULL;
 }
 
-QString node::Get(){
+int node::Get(){
     return value;
 }
 
-void node::Set(QString num){
+void node::Set(double num){
     value = num;
 }
 

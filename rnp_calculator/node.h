@@ -3,16 +3,18 @@
 
 #include <QString>
 
+using namespace std;
+
 class node
 {
 private:
-    QString value;
+    double value;
     node * previous;
     node * next;
 public:
     node();
-    QString Get();
-    void Set(QString num);
+    int Get();
+    void Set(double num);
     void SetNext(node *prox);
     void SetPrevious(node *last);
     node * GetNext();

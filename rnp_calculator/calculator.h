@@ -2,6 +2,7 @@
 #define CALCULATOR_H
 
 #include <QWidget>
+#include "stack.h"
 
 namespace Ui {
 class calculator;
@@ -13,12 +14,15 @@ class calculator : public QWidget
 
 private:
     // FILA
+    stack * stk;
 
 public:
     explicit calculator(QWidget *parent = 0);
     ~calculator();
 
 private slots:
+    stack * getStack();
+
     void on_button_1_clicked();
 
     void on_button_2_clicked();
@@ -54,6 +58,10 @@ private slots:
     void on_button_div_clicked();
 
     void on_button_rol_clicked();
+
+    void on_button_down_clicked();
+
+    void on_button_up_clicked();
 
 private:
     Ui::calculator *ui;
