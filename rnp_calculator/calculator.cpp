@@ -18,6 +18,25 @@ stack * calculator::getStack(){
     return stk;
 }
 
+void calculator::printStack(){
+
+    node *percorre;
+
+    ui->textEdit->clear();
+
+    percorre = stk->getHead();
+
+    while(percorre != NULL){
+        ui->textEdit->append(QString("%1").arg(percorre->Get()));
+        percorre = percorre->GetNext();
+    }
+
+//    for(percorre=stk->getLast();(percorre->GetNext()->GetNext()) != NULL; percorre = percorre->GetNext() ){
+//        ui->textEdit->append(QString("%1").arg(percorre->Get()));
+//    }
+
+}
+
 void calculator::on_button_1_clicked()
 {
     QString t = ui->lineEdit->text();
@@ -85,21 +104,24 @@ void calculator::on_button_clear_clicked()
 
 void calculator::on_button_del_clicked()
 {
-    QString t = ui->lineEdit->text();
-    t.chop(1);
-    ui->lineEdit->setText(t);
+//    QString t = ui->lineEdit->text();
+//    t.chop(1);
+//    ui->lineEdit->setText(t);
+    stk->removeNew();
+    printStack();
 }
 
 void calculator::on_button_down_clicked()
 {
     // Adjust to correct position
-    ui->textEdit->scrollToAnchor("");
+    ui->textEdit->scroll(0,-1);
 }
 
 void calculator::on_button_up_clicked()
 {
     // Adjust to correct position
-    ui->textEdit->scrollToAnchor("1");
+//    ui->textEdit->scrollToAnchor("1");
+    ui->textEdit->scroll(0,1);
 }
 
 
@@ -107,78 +129,88 @@ void calculator::on_button_sum_clicked()
 {
     //pega dois ultimos da fila e soma
     double a,b;
-    a = stk->getLast()->Get(); /*toDouble();*/
+    a = stk->getLast()->Get();
     stk->removeNew();
-    b = stk->getLast()->Get(); /*.toDouble();*/
+    b = stk->getLast()->Get();
     stk->removeNew();
 
     ui->textEdit->setText(QString("%1").arg(a+b));
     //insere resultado na fila
 
     stk->insertNew(a+b);
+    printStack();
 }
 
 void calculator::on_button_minus_clicked()
 {
-    //pega dois ultimos da fila e soma
+    //pega dois ultimos da fila e subtrai
     double a,b;
-    a = stk->getLast()->Get(); /*toDouble();*/
+    a = stk->getLast()->Get();
     stk->removeNew();
-    b = stk->getLast()->Get(); /*.toDouble();*/
+    b = stk->getLast()->Get();
     stk->removeNew();
 
     ui->textEdit->setText(QString("%1").arg(a-b));
     //insere resultado na fila
 
     stk->insertNew(a-b);
+    printStack();
 }
 
 void calculator::on_button_mult_clicked()
 {
-    //pega dois ultimos da fila e soma
+    //pega dois ultimos da fila e multiplica
     double a,b;
-    a = stk->getLast()->Get(); /*toDouble();*/
+    a = stk->getLast()->Get();
     stk->removeNew();
-    b = stk->getLast()->Get(); /*.toDouble();*/
+    b = stk->getLast()->Get();
     stk->removeNew();
 
     ui->textEdit->setText(QString("%1").arg(a*b));
     //insere resultado na fila
 
     stk->insertNew(a*b);
+    printStack();
 }
 
 void calculator::on_button_div_clicked()
 {
-    //pega dois ultimos da fila e soma
+    //pega dois ultimos da fila e divide
     double a,b;
-    a = stk->getLast()->Get(); /*toDouble();*/
+    a = stk->getLast()->Get();
     stk->removeNew();
-    b = stk->getLast()->Get(); /*.toDouble();*/
+    b = stk->getLast()->Get();
     stk->removeNew();
 
     ui->textEdit->setText(QString("%1").arg(a/b));
     //insere resultado na fila
 
     stk->insertNew(a/b);
+    printStack();
 }
 
 void calculator::on_button_rol_clicked()
 {
+    double a,b;
+    a = stk->getLast()->Get();
+    stk->removeNew();
+    b = stk->getLast()->Get();
+    stk->removeNew();
 
+    stk->insertNew(a);
+    stk->insertNew(b);
+    printStack();
 }
 
 void calculator::on_button_enter_clicked()
 {
-    int t = ui->lineEdit->text().toInt();
+    if (ui->lineEdit->text() != ""){
+        int t = ui->lineEdit->text().toInt();
 
-    stk->insertNew(t);
+        stk->insertNew(t);
 
-//    ui->calculator.
-//            .stk->insertNew(t);
-
-    ui->textEdit->append(QString("%1").arg(t));
-//    stk->insertNew(t);
+        ui->textEdit->append(QString("%1").arg(t));
+    }
 
     ui->lineEdit->clear();
 }

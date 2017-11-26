@@ -20,10 +20,11 @@ private:
     node *head;
 public:
     stack();
+    node * getHead();
     void insertNew(double str);
     void removeNew();
     node * getLast();
-    void print();
+//    void print();
 };
 
 #endif // STACK_H

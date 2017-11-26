@@ -63,6 +63,8 @@ private slots:
 
     void on_button_up_clicked();
 
+    void printStack();
+
 private:
     Ui::calculator *ui;
 };

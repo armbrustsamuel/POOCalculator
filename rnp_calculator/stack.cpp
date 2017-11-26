@@ -5,6 +5,10 @@ stack::stack()
     head = NULL;
 }
 
+node * stack::getHead(){
+    return head;
+}
+
 void stack::insertNew(double str){
     node *percorre, *no;
     no = new node;
