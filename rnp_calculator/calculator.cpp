@@ -1,5 +1,7 @@
 #include "calculator.h"
 #include "ui_calculator.h"
+#include <QKeyEvent>
+#include <QScrollBar>
 
 calculator::calculator(QWidget *parent) :
     QWidget(parent),
@@ -114,14 +116,13 @@ void calculator::on_button_del_clicked()
 void calculator::on_button_down_clicked()
 {
     // Adjust to correct position
-    ui->textEdit->scroll(0,-1);
+    ui->textEdit->verticalScrollBar()->setValue(ui->textEdit->verticalScrollBar()->value() + 10);
 }
 
 void calculator::on_button_up_clicked()
 {
     // Adjust to correct position
-//    ui->textEdit->scrollToAnchor("1");
-    ui->textEdit->scroll(0,1);
+    ui->textEdit->verticalScrollBar()->setValue(ui->textEdit->verticalScrollBar()->value() - 10);
 }
 
 
@@ -134,10 +135,10 @@ void calculator::on_button_sum_clicked()
     b = stk->getLast()->Get();
     stk->removeNew();
 
-    ui->textEdit->setText(QString("%1").arg(a+b));
+    ui->textEdit->setText(QString("%1").arg(b+a));
     //insere resultado na fila
 
-    stk->insertNew(a+b);
+    stk->insertNew(b+a);
     printStack();
 }
 
@@ -150,10 +151,10 @@ void calculator::on_button_minus_clicked()
     b = stk->getLast()->Get();
     stk->removeNew();
 
-    ui->textEdit->setText(QString("%1").arg(a-b));
+    ui->textEdit->setText(QString("%1").arg(b-a));
     //insere resultado na fila
 
-    stk->insertNew(a-b);
+    stk->insertNew(b-a);
     printStack();
 }
 
@@ -182,10 +183,10 @@ void calculator::on_button_div_clicked()
     b = stk->getLast()->Get();
     stk->removeNew();
 
-    ui->textEdit->setText(QString("%1").arg(a/b));
+    ui->textEdit->setText(QString("%1").arg(b/a));
     //insere resultado na fila
 
-    stk->insertNew(a/b);
+    stk->insertNew(b/a);
     printStack();
 }
 
